@@ -58,7 +58,7 @@ async function downloadSession({ service, title, markdown, images }) {
         filename: requested,
         conflictAction: 'uniquify',
       });
-      finalName = (await resolveFinalBasename(id)) || finalName;
+      finalName = (await resolveDownloadPath(id))?.split(/[\\/]/).pop() || finalName;
     } catch {
       failed++;
     }
@@ -66,21 +66,24 @@ async function downloadSession({ service, title, markdown, images }) {
   }
 
   const mdUrl = 'data:text/markdown;charset=utf-8;base64,' + b64EncodeUtf8(markdown);
-  await chrome.downloads.download({
+  const mdId = await chrome.downloads.download({
     url: mdUrl,
     filename: mdPath,
     conflictAction: 'uniquify',
   });
 
-  return { location: mdPath, imageCount: images.length, failed };
+  // 절대 경로를 돌려줘서 "어디에 저장됐는지"를 사용자가 바로 알 수 있게 한다
+  // (다운로드 폴더를 Vault 루트로 안 바꾼 채 Obsidian 모드를 쓰는 실수를 즉시 드러냄)
+  const absolutePath = await resolveDownloadPath(mdId);
+  return { location: absolutePath || mdPath, imageCount: images.length, failed };
 }
 
-// 다운로드 항목의 최종 파일명(확장자 교정·uniquify 반영)을 얻는다
-async function resolveFinalBasename(id) {
+// 다운로드 항목의 최종 저장 경로(확장자 교정·uniquify 반영, 절대 경로)를 얻는다
+async function resolveDownloadPath(id) {
   for (let i = 0; i < 20; i++) {
     const [item] = await chrome.downloads.search({ id });
     if (item && item.filename) {
-      return item.filename.split(/[\\/]/).pop();
+      return item.filename;
     }
     await new Promise((r) => setTimeout(r, 100));
   }
