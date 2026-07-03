@@ -1,36 +1,34 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="popup.css" />
 </head>
 <body>
   <h1>Session to Markdown</h1>
-  <button id="save">이 대화를 Markdown으로 저장</button>
+  <button id="save" data-i18n="saveButton"></button>
   <p id="version"></p>
   <p id="status"></p>
 
   <details id="settings">
-    <summary>저장 위치 설정</summary>
+    <summary data-i18n="settingsSummary"></summary>
     <label class="radio">
       <input type="radio" name="mode" value="session" />
-      세션별 폴더 <span class="hint">다운로드/서비스-제목-날짜/</span>
+      <span data-i18n="modeSession"></span> <span class="hint" data-i18n="modeSessionHint"></span>
     </label>
     <label class="radio">
       <input type="radio" name="mode" value="obsidian" />
-      Obsidian Vault 구조 <span class="hint">노트·첨부 폴더 분리</span>
+      <span data-i18n="modeObsidian"></span> <span class="hint" data-i18n="modeObsidianHint"></span>
     </label>
     <div id="obsidianFields">
-      <label class="field">노트 폴더
-        <input type="text" id="noteFolder" placeholder="예: 00 Inbox" />
+      <label class="field"><span data-i18n="noteFolderLabel"></span>
+        <input type="text" id="noteFolder" data-i18n-ph="noteFolderPh" />
       </label>
-      <label class="field">첨부 폴더
-        <input type="text" id="attachmentFolder" placeholder="예: Attachments" />
+      <label class="field"><span data-i18n="attachmentFolderLabel"></span>
+        <input type="text" id="attachmentFolder" data-i18n-ph="attachmentFolderPh" />
       </label>
-      <p class="hint">Vault의 <b>실제 폴더명을 그대로</b> 입력하세요 (자유 입력, 중첩 경로 가능).
-        없는 이름을 적으면 그 폴더가 새로 생기니 오타에 주의.</p>
-      <p class="hint">Chrome의 다운로드 폴더를 <b>Vault 루트</b>로 지정해야 합니다.
-        (확장은 다운로드 폴더 밖에 쓸 수 없습니다)</p>
+      <p class="hint" data-i18n="hintFreeInput"></p>
+      <p class="hint" data-i18n="hintVaultRoot"></p>
     </div>
   </details>
 

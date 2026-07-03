@@ -1,0 +1,40 @@
+{
+  "extName": { "message": "Session to Markdown" },
+  "extDesc": { "message": "ChatGPT, Claude, Gemini 대화 세션 전체를 코드블록·이미지와 함께 Markdown 파일로 다운로드합니다." },
+
+  "saveButton": { "message": "이 대화를 Markdown으로 저장" },
+  "settingsSummary": { "message": "저장 위치 설정" },
+  "modeSession": { "message": "세션별 폴더" },
+  "modeSessionHint": { "message": "다운로드/서비스-제목-날짜/" },
+  "modeObsidian": { "message": "Obsidian Vault 구조" },
+  "modeObsidianHint": { "message": "노트·첨부 폴더 분리" },
+  "noteFolderLabel": { "message": "노트 폴더" },
+  "attachmentFolderLabel": { "message": "첨부 폴더" },
+  "noteFolderPh": { "message": "예: 00 Inbox" },
+  "attachmentFolderPh": { "message": "예: Attachments" },
+  "hintFreeInput": { "message": "Vault의 실제 폴더명을 그대로 입력하세요 (자유 입력, 중첩 경로 가능). 없는 이름을 적으면 그 폴더가 새로 생기니 오타에 주의." },
+  "hintVaultRoot": { "message": "Chrome의 다운로드 폴더를 Vault 루트로 지정해야 합니다. (확장은 다운로드 폴더 밖에 쓸 수 없습니다)" },
+
+  "statusExtracting": { "message": "대화 추출 중…" },
+  "statusDownloading": {
+    "message": "다운로드 중… (이미지 $COUNT$개)",
+    "placeholders": { "count": { "content": "$1" } }
+  },
+  "statusDone": { "message": "저장 완료 ✓" },
+  "statusImages": {
+    "message": "이미지 $SAVED$/$TOTAL$개 저장",
+    "placeholders": { "saved": { "content": "$1" }, "total": { "content": "$2" } }
+  },
+
+  "errUnsupported": { "message": "지원 페이지가 아니거나 새로고침이 필요합니다.\n지원: chatgpt.com · claude.ai · gemini.google.com" },
+  "errNoAdapter": { "message": "지원하지 않는 사이트입니다." },
+  "errNoTurns": { "message": "대화 내용을 찾지 못했습니다. 대화 화면에서 다시 시도해 주세요." },
+  "errImageConvert": { "message": "이미지 변환 실패" },
+
+  "roleUser": { "message": "사용자" },
+  "defaultTitle": { "message": "대화" },
+  "imageAltFallback": {
+    "message": "이미지 $N$",
+    "placeholders": { "n": { "content": "$1" } }
+  }
+}

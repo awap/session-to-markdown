@@ -1,0 +1,40 @@
+{
+  "extName": { "message": "Session to Markdown" },
+  "extDesc": { "message": "Download entire ChatGPT, Claude, and Gemini conversations as Markdown files — code blocks and images included." },
+
+  "saveButton": { "message": "Save this conversation as Markdown" },
+  "settingsSummary": { "message": "Save location" },
+  "modeSession": { "message": "Per-session folder" },
+  "modeSessionHint": { "message": "Downloads/Service-Title-Date/" },
+  "modeObsidian": { "message": "Obsidian vault structure" },
+  "modeObsidianHint": { "message": "separate note & attachment folders" },
+  "noteFolderLabel": { "message": "Note folder" },
+  "attachmentFolderLabel": { "message": "Attachment folder" },
+  "noteFolderPh": { "message": "e.g. 00 Inbox" },
+  "attachmentFolderPh": { "message": "e.g. Attachments" },
+  "hintFreeInput": { "message": "Type your vault's actual folder names (free text, nested paths OK). A typo silently creates a new folder — double-check spelling." },
+  "hintVaultRoot": { "message": "Set Chrome's download location to your vault root. (Extensions cannot write outside the download folder.)" },
+
+  "statusExtracting": { "message": "Extracting conversation…" },
+  "statusDownloading": {
+    "message": "Downloading… ($COUNT$ images)",
+    "placeholders": { "count": { "content": "$1" } }
+  },
+  "statusDone": { "message": "Saved ✓" },
+  "statusImages": {
+    "message": "$SAVED$/$TOTAL$ images saved",
+    "placeholders": { "saved": { "content": "$1" }, "total": { "content": "$2" } }
+  },
+
+  "errUnsupported": { "message": "This page isn't supported, or needs a refresh.\nSupported: chatgpt.com · claude.ai · gemini.google.com" },
+  "errNoAdapter": { "message": "This site is not supported." },
+  "errNoTurns": { "message": "Couldn't find any conversation. Open a conversation and try again." },
+  "errImageConvert": { "message": "Failed to convert image" },
+
+  "roleUser": { "message": "User" },
+  "defaultTitle": { "message": "Conversation" },
+  "imageAltFallback": {
+    "message": "Image $N$",
+    "placeholders": { "n": { "content": "$1" } }
+  }
+}

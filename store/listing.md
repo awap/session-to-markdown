@@ -6,7 +6,7 @@
 
 - **이름**: Session to Markdown
 - **카테고리**: 생산성 → 도구 (Productivity → Tools)
-- **언어**: 한국어 (영어 병기 가능)
+- **언어**: 확장 자체가 다국어(_locales: en 기본, ko) — 스토어 등록 언어는 **영어를 기본**으로 하고, 콘솔의 "스토어 등록정보 → 언어 추가"로 한국어 등록정보를 추가해 아래 한국어 문구를 붙여넣는다. 브라우저/스토어 언어에 따라 사용자에게 해당 언어가 노출된다.
 
 ## 요약 (Summary, 132자 이내)
 
@@ -30,6 +30,7 @@ LLM 웹 UI는 턴 단위 복사만 지원해서 대화 전체를 백업하려면
 - 표·목록·인용·링크 등 마크다운 요소 변환
 - 결과물은 "서비스-제목-날짜" 폴더로 다운로드 폴더에 저장
 - Obsidian 모드: 노트는 Inbox로, 이미지는 Attachments로 분리 저장 (폴더명 설정 가능)
+- 다국어 지원 (영어·한국어, 브라우저 언어 자동 감지)
 
 개인정보
 - 어떤 데이터도 외부로 전송하지 않습니다. 모든 변환은 브라우저 안에서 일어나며 결과물은 로컬에만 저장됩니다.
@@ -49,6 +50,7 @@ Features
 - Converts tables, lists, quotes, and links
 - Output is saved to your Downloads folder as "Service-Title-Date/"
 - Obsidian mode: notes go to your Inbox folder, images to Attachments (folder names configurable)
+- Localized UI (English & Korean, follows your browser language)
 
 Privacy
 - No data ever leaves your browser. All conversion happens locally and the output is saved only to your Downloads folder.
@@ -83,7 +85,7 @@ Works great with Obsidian
 ## 제출 절차
 
 1. https://chrome.google.com/webstore/devconsole 접속, 개발자 계정 등록 (1회 $5)
-2. "새 항목" → `session-to-markdown-v0.2.2.zip` 업로드
+2. "새 항목" → `session-to-markdown-v0.3.0.zip` 업로드
 3. 위 문구들 입력, 스크린샷 1280×800 최소 1장 첨부 (대화 페이지 + 팝업이 보이는 화면 권장)
 4. 데이터 사용 공시 작성 → 검토 제출 (심사 보통 1~3일)
 

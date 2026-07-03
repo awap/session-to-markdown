@@ -140,7 +140,12 @@
     if (ctx.seenSrcs.has(src)) return '';
     ctx.seenSrcs.add(src);
     const n = ctx.images.push({ src, alt: img.getAttribute('alt') || '' });
-    const alt = (img.getAttribute('alt') || `이미지 ${n}`).replace(/[\[\]\n]/g, ' ').trim();
+    // chrome 가드: 확장 밖(개발 중 주입 테스트)에서도 동작하도록
+    const fallbackAlt =
+      typeof chrome !== 'undefined' && chrome.i18n
+        ? chrome.i18n.getMessage('imageAltFallback', [String(n)])
+        : `Image ${n}`;
+    const alt = (img.getAttribute('alt') || fallbackAlt).replace(/[\[\]\n]/g, ' ').trim();
     return `\n\n![${alt}](\x00IMG_${n}\x00)\n\n`;
   }
 

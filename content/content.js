@@ -1,6 +1,7 @@
 // 팝업의 추출 요청을 받아 현재 세션을 Markdown으로 변환해 돌려준다.
 (() => {
   const S2M = window.S2M;
+  const t = (key, subs) => chrome.i18n.getMessage(key, subs);
 
   chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
     if (msg?.type !== 'S2M_EXTRACT') return;
@@ -12,20 +13,20 @@
 
   async function extract() {
     const adapter = S2M.pickAdapter();
-    if (!adapter) return { error: '지원하지 않는 사이트입니다.' };
+    if (!adapter) return { error: t('errNoAdapter') };
 
     const turns = adapter.getTurns();
     if (!turns.length) {
-      return { error: '대화 내용을 찾지 못했습니다. 대화 화면에서 다시 시도해 주세요.' };
+      return { error: t('errNoTurns') };
     }
 
     const ctx = { images: [], codeBlocks: [] };
-    const parts = turns.map((t) => {
-      const heading = t.role === 'user' ? '## 🧑 사용자' : `## 🤖 ${adapter.label}`;
-      return `${heading}\n\n${S2M.serialize(t.root, ctx)}`;
+    const parts = turns.map((turn) => {
+      const heading = turn.role === 'user' ? `## 🧑 ${t('roleUser')}` : `## 🤖 ${adapter.label}`;
+      return `${heading}\n\n${S2M.serialize(turn.root, ctx)}`;
     });
 
-    const title = adapter.getTitle() || '대화';
+    const title = adapter.getTitle() || t('defaultTitle');
     // YAML frontmatter — Obsidian Properties 패널·Dataview 쿼리 대상이 된다.
     // 제목의 따옴표·콜론이 YAML을 깨지 않도록 JSON 문자열로 이스케이프.
     const markdown = [
@@ -122,7 +123,7 @@
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => resolve(reader.result);
-      reader.onerror = () => reject(new Error('이미지 변환 실패'));
+      reader.onerror = () => reject(new Error(t('errImageConvert')));
       reader.readAsDataURL(blob);
     });
   }
