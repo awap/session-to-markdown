@@ -89,8 +89,15 @@ Works great with Obsidian
 3. 위 문구들 입력, 스크린샷 1280×800 최소 1장 첨부 (대화 페이지 + 팝업이 보이는 화면 권장)
 4. 데이터 사용 공시 작성 → 검토 제출 (심사 보통 1~3일)
 
-## 스크린샷 체크리스트
+## 그래픽 저작물 (store/assets/ 에 준비 완료)
 
-- [ ] 1280×800 스크린샷 1~5장 (필수 1장)
-- [ ] 128×128 스토어 아이콘 = icons/icon128.png 재사용 가능
-- [ ] (선택) 440×280 소형 프로모 타일
+| 대시보드 항목 | 파일 | 규격 |
+|---|---|---|
+| 스토어 아이콘 | `icons/icon128.png` | 128×128 PNG |
+| 캡쳐화면 1 | `store/assets/screenshot-1.jpg` | 1280×800 JPEG |
+| 캡쳐화면 2 | `store/assets/screenshot-2.jpg` | 1280×800 JPEG |
+| 작은 프로모션 타일 | `store/assets/tile-small.jpg` | 440×280 JPEG |
+| 마키 프로모션 타일 | `store/assets/marquee.jpg` | 1400×560 JPEG |
+
+- 전부 "알파 비포함" 조건 충족(JPEG). 디자인 소스는 `store/assets/src/*.html` — 문구 수정 후 headless Chrome으로 재렌더 가능.
+- 프로모션 동영상(YouTube URL)은 선택 항목이라 비워둬도 된다.

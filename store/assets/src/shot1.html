@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1280px; height: 800px; overflow: hidden;
+    font-family: -apple-system, system-ui, sans-serif;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 55%, #a855f7 100%);
+    padding: 44px 56px;
+  }
+  .headline { color: #fff; font-size: 34px; font-weight: 800; letter-spacing: -0.5px; }
+  .sub { color: rgba(255,255,255,.85); font-size: 18px; margin-top: 8px; }
+  .row { display: flex; align-items: center; gap: 28px; margin-top: 36px; }
+
+  .card { background: #fff; border-radius: 16px; box-shadow: 0 24px 60px rgba(30,20,80,.35); }
+
+  /* 채팅 목업 */
+  .chat { width: 545px; height: 560px; padding: 22px 24px; overflow: hidden; }
+  .chat .bar { display: flex; gap: 7px; margin-bottom: 18px; }
+  .chat .dot { width: 11px; height: 11px; border-radius: 50%; background: #e5e7eb; }
+  .chat .dot:nth-child(1){ background:#fca5a5; } .chat .dot:nth-child(2){ background:#fcd34d; } .chat .dot:nth-child(3){ background:#86efac; }
+  .bubble-u { margin-left: 140px; background: #eef0f4; border-radius: 14px; padding: 12px 16px; font-size: 15px; color: #111; }
+  .msg-a { margin-top: 18px; font-size: 15px; color: #1f2937; line-height: 1.55; }
+  .code { margin-top: 12px; background: #0f172a; border-radius: 10px; padding: 4px 0 12px; font-family: "SF Mono", Menlo, monospace; font-size: 13px; }
+  .code .chead { display: flex; justify-content: space-between; padding: 8px 14px 10px; color: #94a3b8; font-size: 11.5px; font-family: -apple-system, system-ui, sans-serif; }
+  .code pre { padding: 0 16px; color: #e2e8f0; line-height: 1.6; }
+  .k { color: #7dd3fc; } .v { color: #fbbf24; } .cm { color: #64748b; }
+  .imgrow { margin-top: 16px; display: flex; gap: 10px; }
+  .thumb { width: 92px; height: 68px; border-radius: 10px; background: linear-gradient(160deg,#c7d2fe,#e9d5ff); display:flex; align-items:center; justify-content:center; font-size:26px; }
+
+  .arrow { color: #fff; font-size: 52px; font-weight: 800; text-shadow: 0 4px 16px rgba(0,0,0,.2); }
+
+  /* 팝업 복제 + md 미리보기 */
+  .stack { display: flex; flex-direction: column; gap: 20px; width: 540px; }
+  .popup { width: 316px; padding: 18px; align-self: flex-end; }
+  .popup h1 { font-size: 14px; margin-bottom: 12px; color: #111; }
+  .btn { width: 100%; padding: 11px; border-radius: 8px; background: #6366f1; color: #fff; font-size: 13px; font-weight: 600; text-align: center; }
+  .ver { text-align: center; color: #b6b9c2; font-size: 10px; margin-top: 7px; }
+  .stat { font-size: 12px; color: #444; margin-top: 10px; line-height: 1.5; white-space: pre-line; }
+  .stat .ok { color: #16a34a; font-weight: 700; }
+  .sum { margin-top: 12px; border-top: 1px solid #eee; padding-top: 9px; color: #666; font-size: 12px; font-weight: 600; }
+
+  .md { width: 540px; padding: 18px 22px; font-family: "SF Mono", Menlo, monospace; font-size: 12.5px; line-height: 1.62; color: #334155; white-space: pre-wrap; }
+  .md .name { white-space: normal; }
+  .md .name { font-family: -apple-system, system-ui, sans-serif; font-size: 12px; color: #94a3b8; margin-bottom: 8px; }
+  .fm { color: #8b5cf6; }
+  .hd { color: #0f172a; font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="headline">Save the entire conversation as Markdown</div>
+  <div class="sub">ChatGPT · Claude · Gemini — one click, code blocks & images included</div>
+  <div class="row">
+    <div class="card chat">
+      <div class="bar"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+      <div class="bubble-u">Explain YAML with a quick example</div>
+      <div class="msg-a">YAML is a human-friendly format for configuration files. Keys and values are separated by a colon, and structure comes from indentation:</div>
+      <div class="code">
+        <div class="chead"><span>yaml</span><span>copy</span></div>
+        <pre><span class="cm"># server settings</span>
+<span class="k">server:</span>
+  <span class="k">port:</span> <span class="v">8080</span>
+  <span class="k">environment:</span> <span class="v">production</span></pre>
+      </div>
+      <div class="msg-a">Here are the diagrams you asked for:</div>
+      <div class="imgrow"><div class="thumb">📊</div><div class="thumb">🖼️</div><div class="thumb">📈</div></div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="stack">
+      <div class="card popup">
+        <h1>Session to Markdown</h1>
+        <div class="btn">Save this conversation as Markdown</div>
+        <div class="ver">v0.3.0</div>
+        <div class="stat"><span class="ok">Saved ✓</span>
+~/Vault/00 Inbox/ChatGPT-YAML-explained.md
+3/3 images saved</div>
+        <div class="sum">▸ Save location</div>
+      </div>
+      <div class="card md">
+        <div class="name">ChatGPT-YAML-explained-20260703.md</div><span class="fm">---
+title: "Explain YAML with a quick example"
+service: ChatGPT
+date: 2026-07-03T15:30
+tags: [ai-conversation, chatgpt]
+---</span>
+<span class="hd">## 🧑 User</span>  Explain YAML with a quick example
+<span class="hd">## 🤖 ChatGPT</span>  ```yaml … ```  ![Image 1](images/image-01.png)</div>
+    </div>
+  </div>
+</body>
+</html>

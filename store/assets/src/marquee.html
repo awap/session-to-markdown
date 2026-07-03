@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1400px; height: 560px; overflow: hidden;
+    font-family: -apple-system, system-ui, sans-serif;
+    background: linear-gradient(120deg, #6366f1 0%, #8b5cf6 55%, #a855f7 100%);
+    display: flex; align-items: center; padding: 0 90px; gap: 70px;
+  }
+  .left { flex: 1; }
+  .brand { display: flex; align-items: center; gap: 24px; }
+  .brand img { width: 104px; height: 104px; border-radius: 24px; box-shadow: 0 14px 36px rgba(20,10,60,.35); }
+  .name { color: #fff; font-size: 52px; font-weight: 800; letter-spacing: -1px; line-height: 1.1; }
+  .tag { color: rgba(255,255,255,.9); font-size: 22px; margin-top: 26px; line-height: 1.5; max-width: 640px; }
+  .chips { margin-top: 28px; display: flex; gap: 12px; }
+  .chip { background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.45); color: #fff;
+    border-radius: 999px; padding: 8px 18px; font-size: 16px; font-weight: 600; }
+
+  .md {
+    width: 430px; background: #fff; border-radius: 16px; padding: 24px 26px;
+    box-shadow: 0 28px 70px rgba(25,15,70,.4);
+    font-family: "SF Mono", Menlo, monospace; font-size: 13.5px; line-height: 1.7; color: #334155;
+    white-space: pre-wrap;
+  }
+  .md .fname { white-space: normal; }
+  .md .fname { font-family: -apple-system, system-ui, sans-serif; font-size: 12.5px; color: #94a3b8; margin-bottom: 10px; }
+  .fm { color: #8b5cf6; }
+  .hd { color: #0f172a; font-weight: 700; }
+  .code { color: #0e7490; }
+</style>
+</head>
+<body>
+  <div class="left">
+    <div class="brand">
+      <img src="../../../icons/icon128.png" alt="">
+      <div class="name">Session to Markdown</div>
+    </div>
+    <div class="tag">Download entire ChatGPT · Claude · Gemini conversations as Markdown files — code blocks and images included. Obsidian-ready.</div>
+    <div class="chips">
+      <div class="chip">ChatGPT</div><div class="chip">Claude</div><div class="chip">Gemini</div>
+      <div class="chip">→ .md + images/</div>
+    </div>
+  </div>
+  <div class="md">
+    <div class="fname">ChatGPT-YAML-explained-20260703.md</div><span class="fm">---
+title: "Explain YAML with an example"
+service: ChatGPT
+tags: [ai-conversation]
+---</span>
+<span class="hd">## 🧑 User</span>
+Explain YAML with an example
+<span class="hd">## 🤖 ChatGPT</span>
+<span class="code">```yaml
+server:
+  port: 8080
+```</span>
+![Image 1](images/image-01.png)</div>
+</body>
+</html>

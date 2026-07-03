@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1280px; height: 800px; overflow: hidden;
+    font-family: -apple-system, system-ui, sans-serif;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 55%, #a855f7 100%);
+    padding: 44px 56px;
+  }
+  .headline { color: #fff; font-size: 34px; font-weight: 800; letter-spacing: -0.5px; }
+  .sub { color: rgba(255,255,255,.85); font-size: 18px; margin-top: 8px; }
+  .row { display: flex; align-items: stretch; gap: 28px; margin-top: 36px; }
+  .card { background: #fff; border-radius: 16px; box-shadow: 0 24px 60px rgba(30,20,80,.35); }
+
+  /* Vault 트리 */
+  .tree { width: 480px; padding: 24px 28px; font-size: 15.5px; color: #1f2937; line-height: 2.05; }
+  .tree .root { font-weight: 800; font-size: 17px; margin-bottom: 6px; }
+  .tree .in { padding-left: 26px; }
+  .tree .in2 { padding-left: 56px; color: #4b5563; font-size: 14.5px; }
+  .hl { background: #eef2ff; border-radius: 6px; padding: 2px 8px; }
+  .dim { color: #9ca3af; }
+
+  /* 노트 뷰 */
+  .note { flex: 1; padding: 24px 30px; }
+  .note .title { font-size: 21px; font-weight: 800; color: #111; margin-bottom: 14px; }
+  .props { border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px 16px; font-size: 13.5px; color: #374151; }
+  .props .p { display: flex; gap: 12px; padding: 4px 0; }
+  .props .k { width: 74px; color: #9ca3af; }
+  .chip { display: inline-block; background: #ede9fe; color: #6d28d9; border-radius: 999px; padding: 2px 10px; font-size: 12px; margin-right: 6px; }
+  .body { margin-top: 16px; font-size: 14.5px; color: #1f2937; line-height: 1.65; }
+  .body .h { font-weight: 800; margin-top: 10px; }
+  .imgcard { margin-top: 10px; width: 250px; height: 120px; border-radius: 10px;
+    background: linear-gradient(160deg,#c7d2fe,#e9d5ff); display: flex; align-items: center; justify-content: center; font-size: 34px; }
+  .cap { color: #94a3b8; font-size: 12px; margin-top: 6px; font-family: "SF Mono", Menlo, monospace; }
+
+  .chips { margin-top: 30px; display: flex; gap: 14px; }
+  .fchip { background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.45); color: #fff;
+    border-radius: 999px; padding: 9px 20px; font-size: 15px; font-weight: 600; }
+</style>
+</head>
+<body>
+  <div class="headline">Obsidian-ready, PARA-friendly</div>
+  <div class="sub">Notes land in your Inbox, images in Attachments — relative links resolved automatically</div>
+  <div class="row">
+    <div class="card tree">
+      <div class="root">🗄️ My Vault</div>
+      <div class="in">📂 00 Inbox</div>
+      <div class="in2"><span class="hl">📄 ChatGPT-YAML-explained-20260703.md</span></div>
+      <div class="in">📂 01 Projects</div>
+      <div class="in">📂 02 Knowledge</div>
+      <div class="in">📂 99 Archive</div>
+      <div class="in">📂 Attachments</div>
+      <div class="in2"><span class="hl">🖼️ ChatGPT-YAML-…-image-01.webp</span></div>
+      <div class="in2"><span class="hl">🖼️ ChatGPT-YAML-…-image-02.png</span></div>
+    </div>
+    <div class="card note">
+      <div class="title">Explain YAML with a quick example</div>
+      <div class="props">
+        <div class="p"><span class="k">service</span> ChatGPT</div>
+        <div class="p"><span class="k">date</span> 2026-07-03T15:30</div>
+        <div class="p"><span class="k">tags</span> <span><span class="chip">ai-conversation</span><span class="chip">chatgpt</span></span></div>
+      </div>
+      <div class="body">
+        <div class="h">🧑 User</div>
+        Explain YAML with a quick example
+        <div class="h">🤖 ChatGPT</div>
+        YAML is a human-friendly format for configuration files…
+        <div class="imgcard">📊</div>
+        <div class="cap">![Image 1](../Attachments/ChatGPT-YAML-…-image-01.webp)</div>
+      </div>
+    </div>
+  </div>
+  <div class="chips">
+    <div class="fchip">YAML frontmatter</div>
+    <div class="fchip">Code blocks preserved</div>
+    <div class="fchip">Images in original position</div>
+    <div class="fchip">English · 한국어</div>
+  </div>
+</body>
+</html>
