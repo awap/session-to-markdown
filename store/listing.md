@@ -32,6 +32,9 @@ LLM 웹 UI는 턴 단위 복사만 지원해서 대화 전체를 백업하려면
 개인정보
 - 어떤 데이터도 외부로 전송하지 않습니다. 모든 변환은 브라우저 안에서 일어나며 결과물은 로컬에만 저장됩니다.
 
+Obsidian과 함께 쓰기
+- Chrome 기본 다운로드 폴더를 Vault의 Inbox 폴더로 지정해두면, 저장 버튼을 누르는 순간 대화가 이미지까지 통째로 Vault 안에 들어갑니다. AI와 나눈 대화를 개인 지식베이스로 옮겨 재가공하려는 분들에게 특히 유용합니다.
+
 **English**
 
 LLM web UIs only let you copy one turn at a time. Session to Markdown saves the entire conversation you're viewing as a Markdown file with a single click.
@@ -45,6 +48,9 @@ Features
 
 Privacy
 - No data ever leaves your browser. All conversion happens locally and the output is saved only to your Downloads folder.
+
+Works great with Obsidian
+- Point Chrome's default download folder at your Vault's Inbox folder, and every saved conversation — images included — lands directly inside your Vault. Great for anyone turning AI conversations into a personal knowledge base.
 
 ## 단일 목적 설명 (Single purpose)
 
