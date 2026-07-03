@@ -12,6 +12,25 @@ async function downloadSession({ service, title, markdown, images }) {
   const safeTitle = sanitize(title);
   const folder = `${sanitize(service)}-${safeTitle}-${timestamp()}`;
 
+  // 이미지를 먼저 받는다. Chrome은 서버가 알려준 실제 포맷에 맞춰 확장자를
+  // 바꿔 저장할 수 있으므로(Claude: alt는 .png인데 실제는 webp), 확정된
+  // 파일명을 읽어 md 본문의 토큰에 반영한 뒤 md를 마지막에 저장한다.
+  let failed = 0;
+  for (const img of images) {
+    let finalName = img.filename;
+    try {
+      const id = await chrome.downloads.download({
+        url: img.url,
+        filename: `${folder}/images/${img.filename}`,
+        conflictAction: 'uniquify',
+      });
+      finalName = (await resolveFinalBasename(id)) || finalName;
+    } catch {
+      failed++;
+    }
+    markdown = markdown.split(img.token).join(`images/${finalName}`);
+  }
+
   const mdUrl = 'data:text/markdown;charset=utf-8;base64,' + b64EncodeUtf8(markdown);
   await chrome.downloads.download({
     url: mdUrl,
@@ -19,20 +38,19 @@ async function downloadSession({ service, title, markdown, images }) {
     conflictAction: 'uniquify',
   });
 
-  let failed = 0;
-  for (const img of images) {
-    try {
-      await chrome.downloads.download({
-        url: img.url,
-        filename: `${folder}/images/${img.filename}`,
-        conflictAction: 'uniquify',
-      });
-    } catch {
-      failed++;
-    }
-  }
-
   return { folder, imageCount: images.length, failed };
+}
+
+// 다운로드 항목의 최종 파일명(확장자 교정·uniquify 반영)을 얻는다
+async function resolveFinalBasename(id) {
+  for (let i = 0; i < 20; i++) {
+    const [item] = await chrome.downloads.search({ id });
+    if (item && item.filename) {
+      return item.filename.split(/[\\/]/).pop();
+    }
+    await new Promise((r) => setTimeout(r, 100));
+  }
+  return null;
 }
 
 // 파일명에 쓸 수 없는 문자 제거 + 길이 제한

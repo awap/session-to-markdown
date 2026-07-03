@@ -62,10 +62,8 @@
           const isUser = el.tagName.toLowerCase() === 'user-query';
           return {
             role: isUser ? 'user' : 'assistant',
-            root:
-              (isUser
-                ? el.querySelector('.query-text, .query-content')
-                : el.querySelector('message-content')) || el,
+            // 사용자 턴은 user-query 전체: 첨부 이미지(.preview-image)가 .query-text 밖에 있다
+            root: isUser ? el : el.querySelector('message-content') || el,
           };
         });
       },

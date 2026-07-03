@@ -40,13 +40,16 @@
       '',
     ].join('\n');
 
-    // 이미지 URL 확정 후 본문의 토큰을 실제 상대 경로로 치환
+    // 본문의 이미지 토큰은 background가 실제 다운로드 파일명 확정 후 치환한다
+    // (Chrome이 실제 포맷에 맞춰 확장자를 바꿀 수 있어서 여기서 확정 불가)
     const images = [];
     for (let i = 0; i < ctx.images.length; i++) {
       const { url, ext } = await resolveImage(ctx.images[i].src, ctx.images[i].alt);
-      const filename = `image-${String(i + 1).padStart(2, '0')}.${ext}`;
-      markdown = markdown.split(`\x00IMG_${i + 1}\x00`).join(`images/${filename}`);
-      images.push({ filename, url });
+      images.push({
+        token: `\x00IMG_${i + 1}\x00`,
+        filename: `image-${String(i + 1).padStart(2, '0')}.${ext}`,
+        url,
+      });
     }
 
     return { service: adapter.label, title, markdown, images };
@@ -62,10 +65,23 @@
         const blob = await (await fetch(src)).blob();
         return { url: await blobToDataUrl(blob), ext: extFromMime(blob.type) };
       }
-      // URL 경로 → alt의 원본 파일명(ChatGPT는 alt에 업로드 파일명이 남음) 순으로 확장자 추정
-      const m =
-        new URL(src).pathname.match(/\.(png|jpe?g|webp|gif|svg)$/i) ||
-        (alt || '').match(/\.(png|jpe?g|webp|gif|svg)$/i);
+      const urlExt = new URL(src).pathname.match(/\.(png|jpe?g|webp|gif|svg)$/i);
+      if (urlExt) return { url: src, ext: normalizeExt(urlExt[1]) };
+      // URL에 확장자가 없으면 실제 바이트를 받아 MIME으로 확정한다.
+      // alt 파일명은 믿을 수 없다: Claude는 alt가 .png여도 webp로 서빙하고,
+      // Chrome이 저장 시 실제 포맷으로 확장자를 바꿔 md 참조가 깨진다.
+      try {
+        const res = await fetch(src, { credentials: 'include' });
+        if (res.ok) {
+          const blob = await res.blob();
+          if (blob.type.startsWith('image/')) {
+            return { url: await blobToDataUrl(blob), ext: extFromMime(blob.type) };
+          }
+        }
+      } catch {
+        // CORS 등으로 못 읽으면 아래 alt 추정으로 폴백
+      }
+      const m = (alt || '').match(/\.(png|jpe?g|webp|gif|svg)$/i);
       return { url: src, ext: m ? normalizeExt(m[1]) : 'png' };
     } catch {
       return { url: src, ext: 'png' };
@@ -85,7 +101,9 @@
       'image/gif': 'gif',
       'image/svg+xml': 'svg',
     };
-    return map[mime] || 'png';
+    if (map[mime]) return map[mime];
+    const sub = (mime.split('/')[1] || '').replace(/[^\w]/g, '');
+    return sub || 'png';
   }
 
   function blobToDataUrl(blob) {

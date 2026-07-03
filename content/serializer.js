@@ -152,7 +152,8 @@
     const h = rect.height || img.naturalHeight || 0;
     if (w > 0 && h > 0 && w <= 48 && h <= 48) return true;
     if (/googleusercontent\.com\/a[-/]/.test(src)) return true;
-    if (img.closest('[class*="avatar" i]')) return true;
+    // 주의: [class*="avatar"] 조상 검사는 쓰지 말 것 — Gemini가 업로드
+    // 미리보기를 avatar 클래스 컨테이너로 감싸서 첨부 이미지가 오탐된다
     return false;
   }
 
