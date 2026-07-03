@@ -14,6 +14,8 @@ function setStatus(text) {
   statusEl.textContent = text;
 }
 
+document.getElementById('version').textContent = `v${chrome.runtime.getManifest().version}`;
+
 // ----- 설정 -----
 
 async function loadSettings() {

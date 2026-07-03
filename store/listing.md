@@ -83,7 +83,7 @@ Works great with Obsidian
 ## 제출 절차
 
 1. https://chrome.google.com/webstore/devconsole 접속, 개발자 계정 등록 (1회 $5)
-2. "새 항목" → `session-to-markdown-v0.2.1.zip` 업로드
+2. "새 항목" → `session-to-markdown-v0.2.2.zip` 업로드
 3. 위 문구들 입력, 스크린샷 1280×800 최소 1장 첨부 (대화 페이지 + 팝업이 보이는 화면 권장)
 4. 데이터 사용 공시 작성 → 검토 제출 (심사 보통 1~3일)
 
