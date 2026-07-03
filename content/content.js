@@ -43,7 +43,7 @@
     // 이미지 URL 확정 후 본문의 토큰을 실제 상대 경로로 치환
     const images = [];
     for (let i = 0; i < ctx.images.length; i++) {
-      const { url, ext } = await resolveImage(ctx.images[i].src);
+      const { url, ext } = await resolveImage(ctx.images[i].src, ctx.images[i].alt);
       const filename = `image-${String(i + 1).padStart(2, '0')}.${ext}`;
       markdown = markdown.split(`\x00IMG_${i + 1}\x00`).join(`images/${filename}`);
       images.push({ filename, url });
@@ -53,7 +53,7 @@
   }
 
   // blob:/data: URL은 페이지 밖에서 접근 불가하므로 여기서 data URL로 변환한다.
-  async function resolveImage(src) {
+  async function resolveImage(src, alt) {
     try {
       if (src.startsWith('data:')) {
         return { url: src, ext: extFromMime(src.slice(5).split(/[;,]/)[0]) };
@@ -62,11 +62,19 @@
         const blob = await (await fetch(src)).blob();
         return { url: await blobToDataUrl(blob), ext: extFromMime(blob.type) };
       }
-      const m = new URL(src).pathname.match(/\.(png|jpe?g|webp|gif|svg)$/i);
-      return { url: src, ext: m ? m[1].toLowerCase() : 'png' };
+      // URL 경로 → alt의 원본 파일명(ChatGPT는 alt에 업로드 파일명이 남음) 순으로 확장자 추정
+      const m =
+        new URL(src).pathname.match(/\.(png|jpe?g|webp|gif|svg)$/i) ||
+        (alt || '').match(/\.(png|jpe?g|webp|gif|svg)$/i);
+      return { url: src, ext: m ? normalizeExt(m[1]) : 'png' };
     } catch {
       return { url: src, ext: 'png' };
     }
+  }
+
+  function normalizeExt(ext) {
+    const e = ext.toLowerCase();
+    return e === 'jpeg' ? 'jpg' : e;
   }
 
   function extFromMime(mime) {

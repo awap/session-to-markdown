@@ -35,11 +35,15 @@
         return (el?.textContent || document.title.replace(/\s*[-|]\s*Claude\s*$/i, '')).trim();
       },
       getTurns() {
-        return q('[data-testid="user-message"], .font-claude-message, [data-testid="assistant-message"]').map(
-          (el) => ({
-            role: el.matches('[data-testid="user-message"]') ? 'user' : 'assistant',
-            root: el,
-          })
+        return q('[data-testid="user-message"], .font-claude-response, .font-claude-message').map(
+          (el) => {
+            const isUser = el.matches('[data-testid="user-message"]');
+            return {
+              role: isUser ? 'user' : 'assistant',
+              // 첨부 썸네일은 user-message 밖(턴 래퍼)에 있어 사용자 턴은 래퍼로 확장
+              root: isUser ? el.closest('[data-test-render-count]') || el : el,
+            };
+          }
         );
       },
     },
@@ -51,7 +55,7 @@
         const el = document.querySelector(
           '.conversation-title, [data-test-id="conversation-title"]'
         );
-        return (el?.textContent || document.title.replace(/\s*[-|]\s*Gemini\s*$/i, '')).trim();
+        return (el?.textContent || document.title.replace(/\s*[-|]\s*(Google )?Gemini\s*$/i, '')).trim();
       },
       getTurns() {
         return q('user-query, model-response').map((el) => {
