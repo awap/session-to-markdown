@@ -8,6 +8,29 @@
   <h1>Session to Markdown</h1>
   <button id="save">이 대화를 Markdown으로 저장</button>
   <p id="status"></p>
+
+  <details id="settings">
+    <summary>저장 위치 설정</summary>
+    <label class="radio">
+      <input type="radio" name="mode" value="session" />
+      세션별 폴더 <span class="hint">다운로드/서비스-제목-날짜/</span>
+    </label>
+    <label class="radio">
+      <input type="radio" name="mode" value="obsidian" />
+      Obsidian Vault 구조 <span class="hint">노트·첨부 폴더 분리</span>
+    </label>
+    <div id="obsidianFields">
+      <label class="field">노트 폴더
+        <input type="text" id="noteFolder" placeholder="Inbox" />
+      </label>
+      <label class="field">첨부 폴더
+        <input type="text" id="attachmentFolder" placeholder="Attachments" />
+      </label>
+      <p class="hint">Chrome의 다운로드 폴더를 <b>Vault 루트</b>로 지정해야 합니다.
+        (확장은 다운로드 폴더 밖에 쓸 수 없습니다)</p>
+    </div>
+  </details>
+
   <script src="popup.js"></script>
 </body>
 </html>

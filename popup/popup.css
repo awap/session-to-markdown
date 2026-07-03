@@ -1,6 +1,6 @@
 body {
   font-family: system-ui, -apple-system, sans-serif;
-  width: 280px;
+  width: 300px;
   margin: 0;
   padding: 16px;
 }
@@ -10,7 +10,7 @@ h1 {
   margin: 0 0 12px;
 }
 
-button {
+button#save {
   width: 100%;
   padding: 10px;
   border: 0;
@@ -22,11 +22,11 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button#save:hover {
   background: #4f46e5;
 }
 
-button:disabled {
+button#save:disabled {
   opacity: 0.6;
   cursor: default;
 }
@@ -37,4 +37,52 @@ button:disabled {
   white-space: pre-line;
   min-height: 1em;
   margin: 10px 0 0;
+}
+
+#settings {
+  margin-top: 14px;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+  font-size: 12px;
+}
+
+#settings summary {
+  cursor: pointer;
+  color: #666;
+  font-weight: 600;
+}
+
+.radio {
+  display: block;
+  margin: 8px 0 2px;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+}
+
+.field input {
+  flex: 1;
+  padding: 4px 6px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.hint {
+  color: #999;
+  font-size: 11px;
+  margin: 4px 0 0;
+}
+
+#obsidianFields {
+  margin: 6px 0 0 20px;
+}
+
+#obsidianFields.disabled {
+  opacity: 0.45;
+  pointer-events: none;
 }

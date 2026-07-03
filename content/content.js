@@ -26,15 +26,21 @@
     });
 
     const title = adapter.getTitle() || '대화';
-    let markdown = [
-      `# ${title}`,
-      '',
-      `- 서비스: ${adapter.label}`,
-      `- URL: ${location.href}`,
-      `- 저장 시각: ${new Date().toLocaleString('ko-KR')}`,
-      `- 턴 수: ${turns.length}`,
-      '',
+    // YAML frontmatter — Obsidian Properties 패널·Dataview 쿼리 대상이 된다.
+    // 제목의 따옴표·콜론이 YAML을 깨지 않도록 JSON 문자열로 이스케이프.
+    const markdown = [
       '---',
+      `title: ${JSON.stringify(title)}`,
+      `service: ${adapter.label}`,
+      `url: ${JSON.stringify(location.href)}`,
+      `date: ${localIso()}`,
+      `turns: ${turns.length}`,
+      'tags:',
+      '  - ai-conversation',
+      `  - ${adapter.id}`,
+      '---',
+      '',
+      `# ${title}`,
       '',
       parts.join('\n\n---\n\n'),
       '',
@@ -104,6 +110,12 @@
     if (map[mime]) return map[mime];
     const sub = (mime.split('/')[1] || '').replace(/[^\w]/g, '');
     return sub || 'png';
+  }
+
+  function localIso() {
+    const d = new Date();
+    const p = (n) => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;
   }
 
   function blobToDataUrl(blob) {

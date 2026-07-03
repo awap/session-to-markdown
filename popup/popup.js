@@ -1,9 +1,51 @@
+const DEFAULTS = {
+  mode: 'session',
+  noteFolder: 'Inbox',
+  attachmentFolder: 'Attachments',
+};
+
 const btn = document.getElementById('save');
 const statusEl = document.getElementById('status');
+const obsidianFields = document.getElementById('obsidianFields');
+const noteFolderEl = document.getElementById('noteFolder');
+const attachmentFolderEl = document.getElementById('attachmentFolder');
 
 function setStatus(text) {
   statusEl.textContent = text;
 }
+
+// ----- 설정 -----
+
+async function loadSettings() {
+  const s = await chrome.storage.sync.get(DEFAULTS);
+  document.querySelector(`input[name="mode"][value="${s.mode}"]`).checked = true;
+  noteFolderEl.value = s.noteFolder;
+  attachmentFolderEl.value = s.attachmentFolder;
+  reflectMode(s.mode);
+}
+
+function reflectMode(mode) {
+  obsidianFields.classList.toggle('disabled', mode !== 'obsidian');
+}
+
+function saveSettings() {
+  const mode = document.querySelector('input[name="mode"]:checked').value;
+  reflectMode(mode);
+  chrome.storage.sync.set({
+    mode,
+    noteFolder: noteFolderEl.value.trim(),
+    attachmentFolder: attachmentFolderEl.value.trim(),
+  });
+}
+
+document.querySelectorAll('input[name="mode"]').forEach((el) =>
+  el.addEventListener('change', saveSettings)
+);
+noteFolderEl.addEventListener('input', saveSettings);
+attachmentFolderEl.addEventListener('input', saveSettings);
+loadSettings();
+
+// ----- 저장 -----
 
 btn.addEventListener('click', async () => {
   btn.disabled = true;
@@ -25,7 +67,7 @@ btn.addEventListener('click', async () => {
       result.imageCount > 0
         ? `\n이미지 ${result.imageCount - result.failed}/${result.imageCount}개 저장`
         : '';
-    setStatus(`저장 완료 ✓\n다운로드/${result.folder}/${imgNote}`);
+    setStatus(`저장 완료 ✓\n${result.location}${imgNote}`);
   } catch (e) {
     setStatus(e.message);
   } finally {
