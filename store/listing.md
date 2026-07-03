@@ -78,7 +78,7 @@ Works great with Obsidian
 ## 개인정보 처리방침 URL
 
 - https://github.com/awap/session-to-markdown/blob/main/store/privacy.md
-  (저장소를 public으로 전환한 뒤 사용 가능)
+  (저장소 public 전환 완료 — 즉시 사용 가능)
 
 ## 제출 절차
 
