@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Session to Markdown",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ChatGPT, Claude, Gemini 대화 세션 전체를 이미지와 함께 Markdown 파일로 다운로드합니다.",
   "permissions": ["downloads"],
   "background": {
